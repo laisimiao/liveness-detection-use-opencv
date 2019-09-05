@@ -1,0 +1,39 @@
+# 运行gather_examples.py
+python3 gather_examples.py --input videos/myreal.avi --output dataset/myreal --detector face_detector --skip 3
+
+python gather_examples.py --input nuaaraw/train/real --output mydataset/train/real --detector face_detector --skip 1
+
+# 运行train_liveness.py
+python train_liveness.py --trainset ./mydataset/train --testset ./mydataset/test --model YXM.model --le YXM.pickle --plot YXM.png
+python train_liveness.py --trainset ./mydataset/train --testset ./mydataset/test --model VGG16.model --le VGG16.pickle --plot VGG16.png
+
+python train_liveness.py --trainset ./mydataset/train --testset ./mydataset/test --model YXM_noNORM_AUG.model --le YXM_noNORM_AUG.pickle --plot YXM_noNORM_AUG.png
+
+python train_liveness.py --trainset ./mydataset/train --testset ./mydataset/test --model YXM_NORM_AUG.model --le YXM_NORM_AUG.pickle --plot YXM_NORM_AUG.png
+
+python train_liveness.py --trainset ./mydataset/train --testset ./mydataset/test --model YXM_NORM_noAUG.model --le YXM_NORM_noAUG.pickle --plot YXM_NORM_noAUG.png
+
+python train_liveness.py --trainset ./mydataset/train --testset ./mydataset/test --model YXM_noNORM_noAUG.model --le YXM_noNORM_noAUG.pickle --plot YXM_noNORM_noAUG.png
+
+
+# 运行liveness_demo.py
+python liveness_demo.py --model YXM.model --le YXM.pickle --detector face_detector
+python liveness_demo.py --model VGG16.model --le VGG16.pickle --detector face_detector
+
+# 运行shotmovie.py
+python shotmovie.py --output videos/myreal.avi
+
+# 运行plotROC.py
+python plotROC.py --testset ./mydataset/test --model YXM_NORM_AUG.model --le YXM_NORM_AUG.pickle --plot YXM_NORM_AUG_ROC.png
+python plotROC.py --testset ./mydataset/test --model YXM_noNORM_AUG.model --le YXM_noNORM_AUG.pickle --plot YXM_noNORM_AUG_ROC.png
+python plotROC.py --testset ./mydataset/test --model YXM_NORM_noAUG.model --le YXM_NORM_noAUG.pickle --plot YXM_NORM_noAUG_ROC.png
+python plotROC.py --testset ./mydataset/test --model YXM_noNORM_noAUG.model --le YXM_noNORM_noAUG.pickle --plot YXM_noNORM_noAUG_ROC.png
+
+python plotROC.py --testset ./mydataset/test --model YXM_NORM_AUG.model --le YXM_NORM_AUG.pickle --plot YXM_NORM_AUG_0.4_ROC.png
+python plotROC.py --testset ./mydataset/test --model YXM_NORM_AUG.model --le YXM_NORM_AUG.pickle --plot YXM_NORM_AUG_0.5_ROC.png
+python plotROC.py --testset ./mydataset/test --model YXM_NORM_AUG.model --le YXM_NORM_AUG.pickle --plot YXM_NORM_AUG_0.6_ROC.png
+
+le2.pickle 和 liveness2.model 是我用他的图片在自己环境里训练一遍得到的
+
+查看当前目录下的文件数量
+ls -l|grep "^-"| wc -l
